@@ -5,9 +5,8 @@ var sd = (function () {
 			if (year instanceof Date) { year = year.getFullYear() };
 			var startDate = new Date(year, 0, 1, 0, 0, 0, 0);
 			var endDate = new Date(year, 11 + 1, 0);
-			console.log(startDate);
-			console.log(endDate);
-			console.log(easter(year));
+			loopDates(startDate, endDate);
+
         },
 		month: function (year, month) {
 			if (!year) { year = new Date() };
@@ -17,16 +16,14 @@ var sd = (function () {
 			};
 			var startDate = new Date(year, month - 1, 1, 0, 0, 0, 0);
 			var endDate = new Date(year, month, 0);
-			console.log(startDate);
-			console.log(endDate);
+			loopDates(startDate, endDate);
         },
 		calendarYear: function (year) {
 			if (!year) { year = new Date() };
 			if (year instanceof Date) { year = year.getFullYear() };
 			var startDate = getMonday(new Date(year, 0, 1, 0, 0, 0, 0));
 			var endDate = getSunday(new Date(year, 11 + 1, 0));
-			console.log(startDate);
-			console.log(endDate);
+			loopDates(startDate, endDate);
         },
 		calendarMonth: function (year, month) {
 			if (!year) { year = new Date() };
@@ -36,8 +33,7 @@ var sd = (function () {
 			};
 			var startDate = getMonday(new Date(year, month - 1, 1, 0, 0, 0, 0));
 			var endDate = getSunday(new Date(year, month, 0));
-			console.log(startDate);
-			console.log(endDate);
+			loopDates(startDate, endDate);
         },
 		week: function (year, month, day) {
 			if (!year) { year = new Date() };
@@ -48,14 +44,12 @@ var sd = (function () {
 			};
 			var startDate = getMonday(new Date(year, month - 1, day));
 			var endDate = getSunday(new Date(year, month - 1, day))
-			console.log(startDate);
-			console.log(endDate);
+			loopDates(startDate, endDate);
         },
 		weekByNumber: function (year, week) {
 			var startDate = w2date(year, week, 0);
 			var endDate = w2date(year, week, 6);
-			console.log(startDate);
-			console.log(endDate);
+			loopDates(startDate, endDate);
         },
 		day: function (year, month, day) {
 			if (!year) { year = new Date() };
@@ -66,8 +60,7 @@ var sd = (function () {
 			};
 			var startDate = new Date(year, month - 1, day, 0, 0, 0, 0)
 			var endDate = startDate;
-			console.log("Day Startdate: " + startDate);
-			console.log("Day Enddate: " + endDate);
+			loopDates(startDate, endDate);
         }
     }
 
@@ -111,5 +104,10 @@ var sd = (function () {
 		return new Date(mon1 + ((wn - 1) * 7 + dayNb) * 86400000);
 	};
 
+	function loopDates (startDate, endDate) {
+		for (var d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+    	console.log(d)
+		}
+	};
 
 } ());
