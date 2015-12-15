@@ -1,26 +1,27 @@
 var sd = (function () {
 	var method = {
         year: function (year) {
-			if (!year) { year = new Date().getFullYear() };
+			if (!year) { year = new Date() };
 			if (year instanceof Date) { year = year.getFullYear() };
-			var startDate = new Date(year, 0, 1, 0, 0, 0, 0)
-			var endDate = new Date(year, 11 + 1, 0)
+			var startDate = new Date(year, 0, 1, 0, 0, 0, 0);
+			var endDate = new Date(year, 11 + 1, 0);
 			console.log(startDate);
 			console.log(endDate);
-			console.log(easter(year))
+			console.log(easter(year));
         },
 		month: function (year, month) {
+			if (!year) { year = new Date() };
 			if (year instanceof Date) {
 				month = year.getMonth() + 1;
 				year = year.getFullYear();
 			};
-			var startDate = new Date(year, month - 1, 1, 0, 0, 0, 0)
-			var endDate = new Date(year, month, 0)
+			var startDate = new Date(year, month - 1, 1, 0, 0, 0, 0);
+			var endDate = new Date(year, month, 0);
 			console.log(startDate);
 			console.log(endDate);
         },
 		calendarYear: function (year) {
-			if (!year) { year = new Date().getFullYear() };
+			if (!year) { year = new Date() };
 			if (year instanceof Date) { year = year.getFullYear() };
 			var startDate = getMonday(new Date(year, 0, 1, 0, 0, 0, 0));
 			var endDate = getSunday(new Date(year, 11 + 1, 0));
@@ -28,6 +29,7 @@ var sd = (function () {
 			console.log(endDate);
         },
 		calendarMonth: function (year, month) {
+			if (!year) { year = new Date() };
 			if (year instanceof Date) {
 				month = year.getMonth() + 1;
 				year = year.getFullYear();
@@ -46,6 +48,12 @@ var sd = (function () {
 			};
 			var startDate = getMonday(new Date(year, month - 1, day));
 			var endDate = getSunday(new Date(year, month - 1, day))
+			console.log(startDate);
+			console.log(endDate);
+        },
+		weekByNumber: function (year, week) {
+			var startDate = w2date(year, week, 0);
+			var endDate = w2date(year, week, 6);
 			console.log(startDate);
 			console.log(endDate);
         },
@@ -93,8 +101,15 @@ var sd = (function () {
 		var M = 3 + Math.floor((L + 40) / 44);
 		var D = L + 28 - 31 * Math.floor(M / 4);
 
-		return new Date(Y, M-1, D)
+		return new Date(Y, M - 1, D)
 	}
+
+	function w2date(year, wn, dayNb) {
+		var j10 = new Date(year, 0, 10, 12, 0, 0),
+			j4 = new Date(year, 0, 4, 12, 0, 0),
+			mon1 = j4.getTime() - j10.getDay() * 86400000;
+		return new Date(mon1 + ((wn - 1) * 7 + dayNb) * 86400000);
+	};
 
 
 } ());
