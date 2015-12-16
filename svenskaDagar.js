@@ -93,7 +93,6 @@ var sd = (function () {
 		var L = I - J;
 		var M = 3 + Math.floor((L + 40) / 44);
 		var D = L + 28 - 31 * Math.floor(M / 4);
-
 		return new Date(Y, M - 1, D)
 	}
 
