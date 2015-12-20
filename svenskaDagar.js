@@ -8,6 +8,7 @@ var weekDays = ["Söndag", "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "
 			var endDate = new Date(year, 11 + 1, 0);
 			var days = loopDates(startDate, endDate);
 			console.table(days);
+			return days;
         },
 		month: function (year, month) {
 			if (!year) { year = new Date() };
@@ -18,7 +19,8 @@ var weekDays = ["Söndag", "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "
 			var startDate = new Date(year, month - 1, 1, 0, 0, 0, 0);
 			var endDate = new Date(year, month, 0);
 			var days = loopDates(startDate, endDate);
-			console.log(days);
+			console.table(days);
+			return days;
         },
 		calendarYear: function (year) {
 			if (!year) { year = new Date() };
@@ -26,7 +28,8 @@ var weekDays = ["Söndag", "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "
 			var startDate = getMonday(new Date(year, 0, 1, 0, 0, 0, 0));
 			var endDate = getSunday(new Date(year, 11 + 1, 0));
 			var days = loopDates(startDate, endDate);
-			console.log(days);
+			console.table(days);
+			return days;
         },
 		calendarMonth: function (year, month) {
 			if (!year) { year = new Date() };
@@ -37,7 +40,8 @@ var weekDays = ["Söndag", "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "
 			var startDate = getMonday(new Date(year, month - 1, 1, 0, 0, 0, 0));
 			var endDate = getSunday(new Date(year, month, 0));
 			var days = loopDates(startDate, endDate);
-			console.log(days);
+			console.table(days);
+			return days;
         },
 		week: function (year, month, day) {
 			if (!year) { year = new Date() };
@@ -49,7 +53,8 @@ var weekDays = ["Söndag", "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "
 			var startDate = getMonday(new Date(year, month - 1, day));
 			var endDate = getSunday(new Date(year, month - 1, day))
 			var days = loopDates(startDate, endDate);
-			console.log(days);
+			console.table(days);
+			return days;
 			
         },
 		weekByNumber: function (year, week) {
@@ -57,6 +62,7 @@ var weekDays = ["Söndag", "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "
 			var endDate = w2date(year, week, 6);
 			var days = loopDates(startDate, endDate);
 			console.table(days);
+			return days;
         },
 		day: function (year, month, day) {
 			if (!year) { year = new Date() };
@@ -69,6 +75,7 @@ var weekDays = ["Söndag", "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "
 			var endDate = startDate;
 			var days = loopDates(startDate, endDate);
 			console.table(days);
+			return days;
         }
     }
 
@@ -117,7 +124,8 @@ var weekDays = ["Söndag", "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "
 			var day = {};
 			day.date = new Date(+d);
 			day.weekday = weekDays[d.getDay()];
-			if(names[d.getMonth()+1][d.getDate()]) {day.names = names[d.getMonth()+1][d.getDate()]}
+			day.isHoliday = false;
+			day.isDayBeforeWorkFreeHoliday = false;
 			days.push(day);
 		}
 		return days;
