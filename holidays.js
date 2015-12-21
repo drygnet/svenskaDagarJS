@@ -8,6 +8,9 @@ function getHoliday(date) {
         {
             return "Nyårsdagen";
         }
-    }
+        if (day === 5) {
+            return "Trettondagsafton"
+        }
+    } //end Jan
     
 }
