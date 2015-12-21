@@ -126,6 +126,7 @@ var weekDays = ["Söndag", "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "
 			day.weekday = weekDays[d.getDay()];
 			day.isHoliday = false;
 			day.isDayBeforeWorkFreeHoliday = false;
+            days.names = names[d.getMonth()+1][d.getDate()]
 			days.push(day);
 		}
 		return days;
